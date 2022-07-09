@@ -1,0 +1,60 @@
+/* MIXINS */
+
+@mixin lgMedia {
+  @media screen and (min-width: 991px) {
+    @content;
+  }
+}
+
+@mixin mdMedia {
+  @media screen and (min-width: 576px) {
+    @content;
+  }
+}
+
+@mixin smMedia {
+  @media screen and (max-width: 576px) {
+    @content;
+  }
+}
+
+@mixin prefix($declarations, $prefixes: ()) {
+  @each $prop, $value in $declarations {
+      #{$prop}: #{$value};
+      -webkit-#{$prop}: #{$value};
+      -moz-#{$prop}: #{$value};
+      -ms-#{$prop}: #{$value};
+      -o-#{$prop}: #{$value};
+  }
+}
+
+@mixin position($position, $top: null, $right: null, $bottom: null, $left: null, $z-index: null, $width: null, $height: null) {
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  z-index: $z-index;
+  width: $width;
+  height: $height;
+}
+
+@mixin grid ($grid, $grid-gap:null, $col-count-height:null,$row-count-height:null) {
+  display: $grid;
+  grid-gap: $grid-gap;
+  grid-template-columns: $col-count-height;
+  grid-template-rows: $row-count-height;
+}
+
+@mixin grid-child ($col-start:null, $col-end:null, $row-start:null, $row-end:null) {
+  grid-column: #{$col-start}/#{$col-end};
+  grid-row: #{$row-start}/#{$row-end};
+}
+
+//PLACEHOLDER - DOESNT SHOW IN OUTPUT CSS
+%flex {
+  display: flex;
+  display: -webkit-flex;
+  @include prefix((align-items: center, flex-wrap: wrap));
+}
+  

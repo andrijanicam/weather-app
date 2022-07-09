@@ -1,0 +1,65 @@
+@use '_mixins.scss';
+@use '_variables.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: variables.$body-bg url('../images/page-bg.png') no-repeat;
+  color: variables.$body-color;
+}
+
+#app {
+  @include mixins.lgMedia { 
+    & {
+        padding: 0 200px;
+    }
+  }
+}
+
+a {
+  &:link, &:visited, &:hover {
+      text-decoration: none;
+      color: inherit;
+  }
+  &:hover {
+    opacity: .9;
+  }
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+
+
+// .flex, 
+// .justify-between, 
+// .justify-center {
+//   @extend %flex;
+// }
+
+// .justify-between {  
+//   @include mixins-placeholder.prefix((justify-content: space-between));
+// }
+
+// .justify-center {  
+//   @include mixins-placeholder.prefix((justify-content: center));
+// }
+
+
+
+
+  
+  
+  
+  
+  
