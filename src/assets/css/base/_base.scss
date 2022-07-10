@@ -41,7 +41,8 @@ a {
   }
 }
 
-button {
+button,
+.button {
   background-color: variables.$dark-green;
   color: variables.$white;
   outline: none;

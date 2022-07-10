@@ -1,7 +1,7 @@
 <template>
   <header> 
     <div class="logo">
-      <img alt="weather-logo" src="./assets/images/logo.png">
+      <router-link :to="{ name: 'Home'}"> <img alt="weather-logo" src="./assets/images/logo.png"> </router-link>
     </div>
   </header>
 

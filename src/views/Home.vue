@@ -22,7 +22,8 @@
           <h3> {{cityCard.city}} </h3>
           <p> {{cityCard.country}} </p>
           <p> {{cityCard.temp}}°C</p>
-          <button> Vidi više </button>
+          <router-link class="button" :to="{ name: 'WeatherDetails', params: { name: cityCard.city, data: localStorageData }}"> View City </router-link>
+          
         </div>
       </div>
         <!-- <router-link :to="{ name: 'CardName', params: { name: city.name }}"> {{city.name}} </router-link> -->
@@ -34,7 +35,7 @@
 <script>
 
 import API from '@/lib/API';
-import {computed, onMounted, onUpdated, ref, watch } from 'vue'
+import { onMounted, ref } from 'vue'
 
 export default {
   name: 'Home',
@@ -50,7 +51,6 @@ export default {
           showError: ref(false),
           message: ref('')
       };
-
 
     function updateLocation() {
       let citiesData = API.getCityName(location.value).then((result) => {
@@ -73,6 +73,10 @@ export default {
             cityArrName = result[0][0].name,
             cityArrCountry = result[0][0].country,
             weatherArrayTemp = result[1].currentConditions.temp;
+
+          // GET COUNTRY NAME FROM COUNTRY CODE
+          const regionNamesInEnglish = new Intl.DisplayNames(['en'], { type: 'region' });
+          cityArrCountry = regionNamesInEnglish.of(cityArrCountry);
 
           class MainData {
             constructor(city, country, temp) {
@@ -97,7 +101,7 @@ export default {
         errors.message.value = 'You added more then five cities';
         errors.showError.value = true;
       }
-  }
+    }
 
     onMounted( () => {
         if(localStorage.localStorageData) {

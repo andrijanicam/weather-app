@@ -3,7 +3,7 @@
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
-    grid-gap: 55px;
+    grid-gap: 55px; 
     text-align: center;
 
     &-inner {
@@ -22,11 +22,18 @@
             font-size: 3rem;
             font-weight: 600;
         }
-        button {
+        .button {
             margin: 40px 0 5px 0;
             width: 100%;
             padding: 11px;
             font-size: 1em;
+            display: block;
         }
     }
 } 
+
+.hourly-weather-wrapper {
+    display: flex;
+    overflow-x: auto;
+    grid-gap: 32px;
+}
