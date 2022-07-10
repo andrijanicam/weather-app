@@ -6,30 +6,27 @@
       <p> Add 5 cities whose temperature you want to track </p>
     </div>
 
-    <div> 
+    <div class="input-field"> 
       <input v-model="location" type="text" class="form-control" placeholder="Add a city ...">
+      <div class="input-field-icon"> <font-awesome-icon icon="fa-solid fa-circle-plus" /> </div>
+      <button @click="updateLocation">Add</button>
 
-      <div class="input-group-append">
-        <button @click="updateLocation">Add</button>
-      </div>
+      <div class="error" v-if="errors.showError"> {{errors.message.value}} </div>
     </div>
+    
 
     <div>
-      <div v-for="cityCard in retrievedObject" :key="cityCard.city"> 
-        {{cityCard.city}}
-        {{cityCard.country}}
-        {{cityCard.temp}}
-        Vidi više
+      <div class="cards"> 
+        <!-- {{localStorageData}}  -->
+        <div class="cards-inner" v-for="cityCard in localStorageData" :key="cityCard.city">
+          <h3> {{cityCard.city}} </h3>
+          <p> {{cityCard.country}} </p>
+          <p> {{cityCard.temp}}°C</p>
+          <button> Vidi više </button>
+        </div>
       </div>
-
-        <div class="weather-card" v-if="citiesData">
-          <div v-for="city in citiesData" :key="city.name"> 
-              <p> {{city.name}} </p>
-              <p> {{city.country}} </p>
-          </div>
-        
-          <!-- <router-link :to="{ name: 'CardName', params: { name: city.name }}"> {{city.name}} </router-link> -->
-      </div>
+        <!-- <router-link :to="{ name: 'CardName', params: { name: city.name }}"> {{city.name}} </router-link> -->
+     
     </div>
  </div>
 </template>
@@ -37,7 +34,7 @@
 <script>
 
 import API from '@/lib/API';
-import {computed, onMounted, ref } from 'vue'
+import {computed, onMounted, onUpdated, ref, watch } from 'vue'
 
 export default {
   name: 'Home',
@@ -49,7 +46,11 @@ export default {
       cardCitiesObject= ref([]),
       location = ref(''),
       localStorageData = ref([]),
-      retrievedObject = ref([]);
+      errors =  {
+          showError: ref(false),
+          message: ref('')
+      };
+
 
     function updateLocation() {
       let citiesData = API.getCityName(location.value).then((result) => {
@@ -59,49 +60,52 @@ export default {
           return result;
       });
 
-      // Get data from both API at the same time
-      Promise.all([citiesData, watherData]).then((result) => { 
-        // allDatas.value = result;
-        
-        // result is returning two arrays from two API-s
-        // For cityArr: [0] - First array of two APIS, [0] - First array of API array
-        let 
-          cityArrName = result[0][0].name,
-          cityArrCountry = result[0][0].country,
-          weatherArrayTemp = result[1].currentConditions.temp;
+      if(localStorageData.value.length < 5) {
+        // get data from both API at the same time
+        Promise.all([citiesData, watherData]).then((result) => { 
 
-        class MainData {
-          constructor(city, country, temp) {
-            this.city = city;
-            this.country = country;
-            this.temp = temp;
+          // result is returning two arrays from two API-s  
+          allDatas.value = result;
+
+          let 
+            // first array[0] return result from first API
+            // second array[0] return result from first API first array
+            cityArrName = result[0][0].name,
+            cityArrCountry = result[0][0].country,
+            weatherArrayTemp = result[1].currentConditions.temp;
+
+          class MainData {
+            constructor(city, country, temp) {
+              this.city = city;
+              this.country = country;
+              this.temp = temp;
+            }
           }
-        }
 
-        cardCitiesObject = new MainData( cityArrName,cityArrCountry, weatherArrayTemp )
-        
-        // Set localStorage item
-        localStorageData.value.push(cardCitiesObject)
-        localStorage.setItem('localStorageData', JSON.stringify(localStorageData.value));
+          cardCitiesObject = new MainData( cityArrName,cityArrCountry, weatherArrayTemp )
+          
+          // Set localStorage item
+          localStorageData.value.push(cardCitiesObject)
+          localStorage.localStorageData = JSON.stringify(localStorageData.value);
 
-        // Retrieve the object from localStorage
-        let retrievedObjects = localStorage.getItem('localStorageData')
-        retrievedObject.value = JSON.parse(retrievedObjects);
+        });
+        // RESET LOCATION VALUE 
+        location.value = '';        
+      }
 
-      });
-      // RESET LOCATION VALUE 
-      location.value = '';        
-    }
+     else {
+        errors.message.value = 'You added more then five cities';
+        errors.showError.value = true;
+      }
+  }
 
     onMounted( () => {
-        // 
+        if(localStorage.localStorageData) {
+          localStorageData.value = JSON.parse(localStorage.localStorageData)
+        }
     });
 
-
-    // COMPUTED
-
-   
-    return { location, updateLocation, allDatas, retrievedObject }
+    return { location, updateLocation, allDatas, errors, localStorageData }
 
   }
 }

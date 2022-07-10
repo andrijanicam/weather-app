@@ -3,7 +3,7 @@ import axios from "axios";
 const CITY_API_URL = 'https://api.api-ninjas.com/v1/city?name=',
     WEATHER_API_URL = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/';
 
-// GET DATA FROM API FOR CITY
+// getting data from API for city
 const getCityName = async ( city ) => {
     const option = {
         method: 'get',
@@ -27,7 +27,7 @@ const getCityName = async ( city ) => {
   }
 }
 
-// GET DATA FROM API FOR WEATHER
+// getting data from API for weather
 const getWeatherData = async ( city ) => {
     const option = {
         method: 'get',

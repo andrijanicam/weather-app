@@ -4,7 +4,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing:border-box;
+  box-sizing: border-box;
 }
 
 body {
@@ -12,9 +12,17 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: variables.$body-bg url('../images/page-bg.png') no-repeat;
-  color: variables.$body-color;
+  color: variables.$white;
 }
 
+.logo {
+  display: inline-block;
+  padding: 40px 0;
+
+  img {
+    max-height: 36px;
+  }
+}
 #app {
   @include mixins.lgMedia { 
     & {
@@ -33,12 +41,72 @@ a {
   }
 }
 
+button {
+  background-color: variables.$dark-green;
+  color: variables.$white;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+}
+
 img {
   display: block;
   max-width: 100%;
   height: auto;
 }
 
+.input-field {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 70px auto 150px;
+
+    &-icon{
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 40px;
+      line-height: 1;
+      color: variables.$dark-green;
+    }
+    
+    input {
+      width: 100%;
+      border: 0;
+      border-radius: 10px;
+      height: 80px;
+      font-family: "Poppins", sans-serif;
+      padding: 0 162px 0 80px; 
+      //162px - button width + button right + 20px paddding
+      //80px - icon width + icon left + 20px paddding
+
+      &, &::placeholder {
+        color: variables.$brown-gray;
+        font-size: 20px;
+        line-height: 30px;
+      }
+    }
+    button {
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      height: calc(100% - 16px);
+      width: 100%;
+      max-width: 134px;
+      font-size: 20px;
+    }
+    .error {
+      position: absolute;
+      top: 100%;
+      font-size: 12px;
+      color: #04353C;
+      font-weight: 600;
+    }
+    
+
+}
 
 
 // .flex, 
