@@ -2,7 +2,30 @@
 @use 'base/_mixins.scss';
 @use 'base/_variables.scss';
 
+.description {
+  p {
+    
+    &:nth-of-type(1) {
+      margin-bottom: 10px;
+      font-size: 20px;
+      font-weight: 600;
 
+      @include mixins.md {
+        margin-bottom: 20px;
+      }
+    } 
+    &:nth-of-type(2) {
+      font-size: 14px;
+      font-weight: 300;
+    }
+
+    @include mixins.md {
+      &:nth-of-type(n) {
+        font-size: 24px;
+      }
+    }
+  }
+}
 .input-field {
     position: relative;
     width: 100%;
@@ -16,10 +39,9 @@
     }
 
     button {
-			@include mixins.position(absolute, $top: 2px, $right: 2px, $z-index: 1, $width: 100%, $height:calc(100% - 4px) );
+      @include mixins.position(absolute, $top: 2px, $right: 2px, $z-index: 1, $width: 100%, $height:calc(100% - 4px) );
       max-width: 55px;
       font-size: 14px;
-
     }
 
     @include mixins.md { 
@@ -32,7 +54,7 @@
         button {
           @include mixins.position(absolute, $top: 8px, $right: 8px, $height:calc(100% - 16px) );
           font-size: 20px;
-          max-width: 134px;
+          max-width: 115px;
         }
       }
     } 
@@ -43,26 +65,32 @@
         input {
           height: 80px;
         }
+        button {
+          max-width: 135px;
+        }
       }
     }
 
     &-icon {
-    	@include mixins.position(absolute, $top: 4px, $left: 10px, $z-index: 1);
+      @include mixins.position(absolute, $top: 4px, $left: 10px, $z-index: 1);
       font-size: 22px;
       line-height: 1;
       color: variables.$dark-green;
 
       @include mixins.md { 
-        @include mixins.position(absolute, $top: 20px, $left: 20px);
+        @include mixins.position(absolute, $top: 15px, $left: 20px);
         font-size: 40px;
+      }
+
+      @include mixins.xl { 
+        @include mixins.position(absolute, $top: 20px, $left: 20px);
       }
     }
 
     .error {
-			@include mixins.position(absolute, $top: 100%, $left: 0, $z-index: 1 );
+      @include mixins.position(absolute, $top: 100%, $left: 0, $z-index: 1 );
       font-size: 12px;
       color: variables.$dark-green;
       font-weight: 600;
     }
 }
-

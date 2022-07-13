@@ -23,8 +23,11 @@
   }
 }
 
-
-
+@mixin xl-1600 {
+  @media screen and (min-width: 1600px) {
+    @content;
+  }
+}
 
 @mixin position($position, $top: null, $right: null, $bottom: null, $left: null, $z-index: null, $width: null, $height: null) {
   position: $position;
@@ -37,14 +40,14 @@
   height: $height;
 }
 
-@mixin prefix($declarations, $prefixes: ()) {
-  @each $prop, $value in $declarations {
-      #{$prop}: #{$value};
-      -webkit-#{$prop}: #{$value};
-      -moz-#{$prop}: #{$value};
-      -ms-#{$prop}: #{$value};
-      -o-#{$prop}: #{$value};
-  }
-}
+// @mixin prefix($declarations, $prefixes: ()) {
+//   @each $prop, $value in $declarations {
+//       #{$prop}: #{$value};
+//       -webkit-#{$prop}: #{$value};
+//       -moz-#{$prop}: #{$value};
+//       -ms-#{$prop}: #{$value};
+//       -o-#{$prop}: #{$value};
+//   }
+// }
 
   

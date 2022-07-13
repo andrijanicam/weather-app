@@ -18,7 +18,16 @@ body {
 .logo {
   display: inline-block;
   a {
-    padding: 40px 0 80px;
+    padding: 20px 0 40px;
+
+    @include mixins.md {
+      padding: 50px 0 80px;
+    }
+
+    @include mixins.lg {
+      padding: 40px 0 80px;
+    }
+   
     display: inline-block;
 
       img {
@@ -28,23 +37,30 @@ body {
  
 }
 
-#app {
+.container {
   padding: 0 20px;
 
-  @include mixins.md { 
+  @include mixins.md {
     & {
         padding: 0 80px;
     }
   } 
-
-  @include mixins.xl { 
+  
+  @include mixins.xl-1600 { 
     & {
         padding: 0 200px;
     }
   }
-  
 }
 
+.content {
+  
+  min-height: calc(100vh - 85px);
+
+  @include mixins.md { 
+    min-height: calc(100vh - 99px);
+  }
+}
 
 a {
   &:link, &:visited, &:hover {
@@ -91,8 +107,19 @@ ul {
   list-style-type: none;
 }
 
-.flex {
-  display: flex;
+footer {
+  background-color: variables.$dark-green;
+  font-size: 14px;
+  margin-top: 44px;
+  padding: 10px 0;
+  text-align: center;
+  font-weight: 300;
+
+  @include mixins.md {
+    font-size: 16px;
+    padding: 15px 0;
+  }
+  
 }
   
   

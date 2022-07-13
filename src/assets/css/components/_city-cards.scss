@@ -5,52 +5,79 @@
 
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
-    grid-gap: 15px; 
-    text-align: center;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-gap: 10px 8px; 
+    text-align: center;   
     
-    @include mixins.sm {
-        grid-gap: 8px; 
-        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    @include mixins.md {
+        grid-gap: 15px; 
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
     @include mixins.xl { 
+        grid-gap: 35px; 
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    @include mixins.xl-1600{
         grid-gap: 55px; 
-        grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
     }
     &-inner {
         background-color: variables.$white;
         border-radius: 10px;
         padding: 40px;
 
+        @include mixins.sm { 
+            padding: 20px 15px 30px;
+        }
+        @include mixins.md { 
+            padding: 20px 15px 30px;
+        }
+
         h3 {
             color: variables.$dark-green;
-       
-            @include mixins.md { 
-                font-size: 1.5rem;  
-                background-attachment: fixed;
+            font-size: 1.5rem;  
+
+            @include mixins.sm { 
+                font-size: 16px;
             }
         }
-        p:not(:nth-of-type(1)) {
-            color: variables.$dark-green;
-        }
 
-        p:nth-of-type(1) {
-            color: variables.$brown-gray;
-            padding: 10px 0 30px 0;
-        }
+        p {
+            &:not(:nth-of-type(1)) {
+                color: variables.$dark-green;
+            }
 
-        p:nth-of-type(2) {
-            font-size: 3rem;
-            font-weight: 600;
+            &:nth-of-type(1) {
+                color: variables.$brown-gray;
+                padding: 10px 0 30px 0;
+                @include mixins.sm { 
+                    padding: 5px 0 10px 0;
+                    font-size: 12px;
+                }
+            }
+            &:nth-of-type(2) {
+                font-size: 3rem;
+                font-weight: 600;
+
+                @include mixins.sm { 
+                    font-size: 38px;
+                }
+            }
         }
 				
         .button {
             @extend button;
-            margin: 40px 0 5px 0;
+            margin: 40px 0 0;
             width: 100%;
             padding: 11px;
             font-size: 1em;
             display: block;
+            font-weight: 500;
+
+            @include mixins.sm { 
+                margin: 20px 0 0;
+                font-size: 14px;
+                padding: 3px;
+            }
         }
     }
 } 

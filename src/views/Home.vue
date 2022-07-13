@@ -1,7 +1,7 @@
 <template>
  <div class="home">
 
-    <div> 
+    <div class="description"> 
       <p> Add Cities </p>
       <p> Add 5 cities whose temperature you want to track </p>
     </div>
