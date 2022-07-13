@@ -17,19 +17,34 @@ body {
 
 .logo {
   display: inline-block;
-  padding: 40px 0;
+  a {
+    padding: 40px 0 80px;
+    display: inline-block;
 
-  img {
-    max-height: 36px;
+      img {
+        max-height: 36px;
+      }
   }
+ 
 }
+
 #app {
-  @include mixins.lgMedia { 
+  padding: 0 20px;
+
+  @include mixins.md { 
+    & {
+        padding: 0 80px;
+    }
+  } 
+
+  @include mixins.xl { 
     & {
         padding: 0 200px;
     }
   }
+  
 }
+
 
 a {
   &:link, &:visited, &:hover {
@@ -41,8 +56,7 @@ a {
   }
 }
 
-button,
-.button {
+button {
   background-color: variables.$dark-green;
   color: variables.$white;
   outline: none;
@@ -58,75 +72,28 @@ img {
   height: auto;
 }
 
-.input-field {
-    position: relative;
-    width: 100%;
-    max-width: 1000px;
-    margin: 70px auto 150px;
+input {
+  border: 0;
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
 
-    &-icon{
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 40px;
-      line-height: 1;
-      color: variables.$dark-green;
-    }
-    
-    input {
-      width: 100%;
-      border: 0;
-      border-radius: 10px;
-      height: 80px;
-      font-family: "Poppins", sans-serif;
-      padding: 0 162px 0 80px; 
-      //162px - button width + button right + 20px paddding
-      //80px - icon width + icon left + 20px paddding
-
-      &, &::placeholder {
-        color: variables.$brown-gray;
-        font-size: 20px;
-        line-height: 30px;
-      }
-    }
-    button {
-      position: absolute;
-      right: 8px;
-      top: 8px;
-      height: calc(100% - 16px);
-      width: 100%;
-      max-width: 134px;
+  &, &::placeholder {
+    color: variables.$brown-gray;
+    font-size: 14px;
+    line-height: 30px;
+    @include mixins.md { 
       font-size: 20px;
     }
-    .error {
-      position: absolute;
-      top: 100%;
-      font-size: 12px;
-      color: #04353C;
-      font-weight: 600;
-    }
-    
-
+  }
 }
 
+ul {
+  list-style-type: none;
+}
 
-// .flex, 
-// .justify-between, 
-// .justify-center {
-//   @extend %flex;
-// }
-
-// .justify-between {  
-//   @include mixins-placeholder.prefix((justify-content: space-between));
-// }
-
-// .justify-center {  
-//   @include mixins-placeholder.prefix((justify-content: center));
-// }
-
-
-
-
+.flex {
+  display: flex;
+}
   
   
   

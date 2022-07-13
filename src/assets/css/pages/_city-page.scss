@@ -1,0 +1,93 @@
+@use 'base/_base.scss';
+@use 'base/_mixins.scss';
+@use 'base/_variables.scss';
+
+#city-page {
+    color: variables.$dark-green;
+
+    > div {
+        background-color: variables.$white;
+        border-radius: 10px;
+        padding: 38px 40px;
+    }
+    .current-city {
+        display: flex;
+        justify-content: space-between;
+        max-width: 860px;
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        ul {
+            font-size: 18px;
+
+            li:not(:last-of-type) {
+                margin-bottom: 10px;
+                
+            }
+
+            span {
+                font-weight: 600;
+                margin-right: 15px;
+            }
+        }
+
+        &-temp {
+
+            div {
+                height: 75px;
+                margin: 0 auto 20px;
+
+                img {
+                    width: 100%;
+                    max-height: 75px;
+                }
+            }
+            p {
+                font-weight: 600;
+                font-size: 3rem;
+            }
+
+        }
+       
+    }
+    .next-days-weather {
+        margin-top: 30px;
+
+        & > div:nth-of-type(2) {
+            margin: 60px 0;
+        }
+        .date-label {
+            font-weight: 600;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        .hourly-weather {
+            text-align: center;
+            flex: 1;
+            min-width: 40px;
+
+            .icon {
+                margin: 30px 0 15px 0;
+                height: 30px;
+                overflow: hidden;
+                img {
+                    margin: auto;
+                    max-height: 30px;
+                }
+            }
+            & > div:nth-of-type(3) {
+                font-weight: 600;
+            }
+        }
+        
+    }
+}
+
+.hourly-weather-wrapper {
+    display: flex;
+    overflow-x: auto;
+    grid-gap: 10px;
+}

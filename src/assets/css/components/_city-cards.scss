@@ -1,28 +1,51 @@
+@use 'base/_base.scss';
+@use 'base/_mixins.scss';
 @use 'base/_variables.scss';
+
 
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
-    grid-gap: 55px; 
+    grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+    grid-gap: 15px; 
     text-align: center;
-
+    
+    @include mixins.sm {
+        grid-gap: 8px; 
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    }
+    @include mixins.xl { 
+        grid-gap: 55px; 
+        grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+    }
     &-inner {
         background-color: variables.$white;
         border-radius: 10px;
         padding: 40px;
 
-        h3, p:not(:nth-of-type(1)) {
+        h3 {
+            color: variables.$dark-green;
+       
+            @include mixins.md { 
+                font-size: 1.5rem;  
+                background-attachment: fixed;
+            }
+        }
+        p:not(:nth-of-type(1)) {
             color: variables.$dark-green;
         }
+
         p:nth-of-type(1) {
             color: variables.$brown-gray;
             padding: 10px 0 30px 0;
         }
+
         p:nth-of-type(2) {
             font-size: 3rem;
             font-weight: 600;
         }
+				
         .button {
+            @extend button;
             margin: 40px 0 5px 0;
             width: 100%;
             padding: 11px;
@@ -32,8 +55,3 @@
     }
 } 
 
-.hourly-weather-wrapper {
-    display: flex;
-    overflow-x: auto;
-    grid-gap: 32px;
-}

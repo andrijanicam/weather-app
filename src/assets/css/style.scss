@@ -3,10 +3,10 @@
 @use 'base/_variables.scss'; 
 @use 'base/_mixins.scss';
 
-
-// USE COMPONENTS FOLDER
+// USE COMPONENTS FOLDER FOLDER
 @use 'components/_city-cards.scss'; 
 
-// USE LAYOUTS FOLDER
-// @use 'layouts/_header_footer.scss'; 
-// @use 'layouts/_main_content.scss'; 
+// USE PAGE FOLDER FOLDER
+@use 'pages/_city-page.scss'; 
+@use 'pages/_home-page.scss'; 
+

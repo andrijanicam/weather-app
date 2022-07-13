@@ -10,25 +10,20 @@
       <input v-model="location" type="text" class="form-control" placeholder="Add a city ...">
       <div class="input-field-icon"> <font-awesome-icon icon="fa-solid fa-circle-plus" /> </div>
       <button @click="updateLocation">Add</button>
-
-      <div class="error" v-if="errors.showError"> {{errors.message.value}} </div>
+      <div class="error" v-if="errors.showError.value"> {{errors.message.value}} </div>
     </div>
     
-
     <div>
       <div class="cards"> 
-        <!-- {{localStorageData}}  -->
         <div class="cards-inner" v-for="cityCard in localStorageData" :key="cityCard.city">
           <h3> {{cityCard.city}} </h3>
           <p> {{cityCard.country}} </p>
-          <p> {{cityCard.temp}}°C</p>
+          <p> {{parseInt(cityCard.temp)}}°C</p>
           <router-link class="button" :to="{ name: 'WeatherDetails', params: { name: cityCard.city, data: localStorageData }}"> View City </router-link>
-          
         </div>
       </div>
-        <!-- <router-link :to="{ name: 'CardName', params: { name: city.name }}"> {{city.name}} </router-link> -->
-     
     </div>
+
  </div>
 </template>
 
@@ -53,23 +48,26 @@ export default {
       };
 
     function updateLocation() {
+
+      validate();
+
       let citiesData = API.getCityName(location.value).then((result) => {
           return result;
       });
       let watherData = API.getWeatherData(location.value).then((result) => {
           return result;
       });
-
-      if(localStorageData.value.length < 5) {
+ 
+      if(!errors.showError.value) {
         // get data from both API at the same time
         Promise.all([citiesData, watherData]).then((result) => { 
 
           // result is returning two arrays from two API-s  
           allDatas.value = result;
-
+          
           let 
             // first array[0] return result from first API
-            // second array[0] return result from first API first array
+            // second array[0] return first array result from first API 
             cityArrName = result[0][0].name,
             cityArrCountry = result[0][0].country,
             weatherArrayTemp = result[1].currentConditions.temp;
@@ -91,16 +89,12 @@ export default {
           // Set localStorage item
           localStorageData.value.push(cardCitiesObject)
           localStorage.localStorageData = JSON.stringify(localStorageData.value);
-
-        });
-        // RESET LOCATION VALUE 
+            
+        })
+      } 
+      
+      // RESET LOCATION VALUE 
         location.value = '';        
-      }
-
-     else {
-        errors.message.value = 'You added more then five cities';
-        errors.showError.value = true;
-      }
     }
 
     onMounted( () => {
@@ -109,7 +103,38 @@ export default {
         }
     });
 
-    return { location, updateLocation, allDatas, errors, localStorageData }
+    function validate() {
+       
+      if( (localStorageData.value.length)) {
+
+        const cityNameLower = localStorageData.value.map(element => {
+          return element.city.toLowerCase();
+        });
+
+        if(localStorageData.value.length > 4) {
+            errors.message.value = 'You added five cities';
+            errors.showError.value = true;
+        }
+    
+        else if(cityNameLower.includes(location.value.toLowerCase())) {
+          errors.message.value = 'You already type this city';
+          errors.showError.value = true;
+        } 
+        
+        else {
+          errors.showError.value =  false;
+          errors.message.value = '';
+        }
+      
+      }
+     
+      return errors;
+
+   
+    };
+    
+
+    return { location, updateLocation, allDatas, errors, localStorageData, validate }
 
   }
 }

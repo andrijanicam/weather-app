@@ -2,46 +2,55 @@
  <div class="home">
 
     <div>  
-      
-			
-		<div v-if="allDatas.length">
+			<div v-if="allDatas.length" id="city-page">
+				
+				<div class="current-city"> 
+					<div>
+						<h1> {{name}} </h1>
 
-			<div>
-				<h1> {{name}} </h1>
-				<div> {{weatherApiData.resolvedAddress}} </div>
-				<div> {{cityApiData[0].latitude}} {{cityApiData[0].longitude}} </div>
-			</div>
+						<ul> 
+							<li> {{weatherApiData.resolvedAddress}} </li>
+							<li> {{cityApiData[0].latitude}}° N, {{cityApiData[0].longitude}} ° E </li>
+						</ul>
+					</div>
 
-			<div> {{weatherApiData.currentConditions.temp}} </div>
-
-			<div>
-				<div> Feels like {{ weatherApiData.currentConditions.feelslike }} </div>
-				<div> Humidity {{ weatherApiData.currentConditions.humidity }} </div>
-				<div> Pressure {{ weatherApiData.currentConditions.pressure }} </div>
-				<div> Wind {{ weatherApiData.currentConditions.windspeed }} m/s {{ direction }}</div>
-				<div> UV index {{ weatherApiData.currentConditions.uvindex }} </div>
-			</div>
-
-			<div> 
-				<div v-for="day in weatherApiData.days.slice(1,4)" :key="day"> 
-					<div> {{formatDate(day.datetime)}} </div>  
-
-					<div class="hourly-weather-wrapper">
-						<div class="hourly-weather" v-for="hour in day.hours" :key="hour">
-							{{hour.temp}}
-
-							<div class="icon">
-								<img :src = "require(`@/assets/images/icons/${hour.icon}.svg`)" :alt="`${hour.icon}`"/>
-							</div> 
-
-							{{hour.datetime.slice(0,2)}}h  
-						
+					<div class="current-city-temp"> 
+						<div>
+							<img :src = "require(`@/assets/images/icons/${weatherApiData.currentConditions.icon}.svg`)" :alt="`${weatherApiData.currentConditions.icon}`"/> 
 						</div> 
+						<p> {{parseInt(weatherApiData.currentConditions.temp)}}°C </p>
+					</div>
+					
+					<ul>
+						<li> <span> Feels like </span> {{ weatherApiData.currentConditions.feelslike }} </li>
+						<li> <span> Humidity </span> {{ weatherApiData.currentConditions.humidity }} </li>
+						<li> <span> Pressure </span> {{ weatherApiData.currentConditions.pressure }} </li>
+						<li> <span> Wind </span> {{ weatherApiData.currentConditions.windspeed }} m/s {{ direction }}</li>
+						<li> <span> UV index </span> {{ weatherApiData.currentConditions.uvindex }} </li>
+					</ul>
+				</div>
+
+				<div class="next-days-weather"> 
+					<div v-for="day in weatherApiData.days.slice(1,4)" :key="day"> 
+						<div class="date-label"> {{formatDate(day.datetime)}} </div>  
+
+						<div class="hourly-weather-wrapper">
+							<div class="hourly-weather" v-for="hour in day.hours" :key="hour">
+								
+								<div> {{hour.datetime.slice(0,2)}}h </div>
+
+								<div class="icon">
+									<img :src = "require(`@/assets/images/icons/${hour.icon}.svg`)" :alt="`${hour.icon}`"/>
+								</div> 
+
+								<div> {{parseInt(hour.temp)}}°C </div>
+							
+							</div> 
+						</div>
 					</div>
 				</div>
-			</div>
 
-		</div>
+			</div>
     </div>
  </div>
 </template>
