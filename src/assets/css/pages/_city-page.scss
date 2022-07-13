@@ -5,88 +5,260 @@
 #city-page {
     color: variables.$dark-green;
 
-    > div {
+    & > div {
         background-color: variables.$white;
         border-radius: 10px;
-        padding: 38px 40px;
     }
     .current-city {
         display: flex;
-        justify-content: space-between;
+        flex-direction: row;
         max-width: 860px;
+        font-weight: 300;
+        padding: 30px 20px;
 
-        h1 {
-            font-size: 28px;
-            margin-bottom: 20px;
+        @include mixins.md {
+            padding: 38px 40px;
         }
         
-        ul {
-            font-size: 18px;
-
-            li:not(:last-of-type) {
-                margin-bottom: 10px;
-            }
-
-            span {
-                font-weight: 600;
-                margin-right: 15px;
-            }
+        @include mixins.sm {
+            flex-direction: column;
         }
 
-        &-temp {
-
-            div {
-                height: 75px;
-                margin: 0 auto 20px;
-
-                img {
-                    width: 100%;
-                    max-height: 75px;
+        ul {
+            li {
+                font-size: 14px;
+                @include mixins.md {
+                    & {
+                        font-size: 18px;
+                    }
                 }
             }
-            p {
-                font-weight: 600;
-                font-size: 3rem;
+        }
+
+        &-info {
+
+            flex: 1;
+
+            h1 {
+                font-size: 22px;
+                margin-bottom: 10px;
+     
+                 @include mixins.md {
+                     font-size: 28px;
+                     margin-bottom: 20px;
+                 }
+             }
+
+            li {
+                span {
+                    display: block;
+
+                    @include mixins.lg {
+                        display: inline-block;
+                        padding-right: 5px;
+                        &:nth-of-type(1):after {
+                            content: (',');
+                        }
+                    }
+                }
+                
+                &:nth-of-type(2) {
+                    padding: 15px 0 30px;
+
+                    @include mixins.md {
+                        padding: 10px 0 0;
+                    }
+                }
+            }
+            
+        }
+
+        &-weather {
+            display: flex;
+            flex: 2;
+            grid-gap: 5px;
+            justify-content: space-between;
+
+            ul {
+                @include mixins.sm {
+                    flex: 2;
+                }
+
+                li {
+                    margin-bottom: 8px;
+
+                    @include mixins.md {
+                        &:not(:last-of-type) {
+                            margin-bottom: 10px;
+                        }
+                    }
+
+                    span {
+                        font-weight: 500;
+                        margin-right: 10px;
+                    }
+                }
             }
 
+            .city-temp {
+
+                width: 50%;
+                text-align: center;
+
+                @include mixins.sm {
+                    text-align: left;
+                    flex: 1;
+                    width: auto;
+                }
+
+                div {
+
+                    display: inline-block;
+                    text-align: center;
+                    line-height: 1;
+
+                    .icon-wrapper {
+                        width: 50px;
+                        margin-bottom: 13px;
+
+                        img {
+                            width: 100%;
+                            max-height: 50px;
+                        }
+
+                        @include mixins.md {
+                            width:   75px;
+                            margin: 0 auto 20px;
+                            img {
+                                width: 100%;
+                                max-height: 75px;
+                            }
+                        }
+                    }
+                }
+
+                p {
+                    font-size: 30px;
+                    font-weight: 600;
+    
+                    @include mixins.md {
+                        font-size: 3rem;
+                    }
+                }
+    
+            }
         }
-       
     }
+
     .next-days-weather {
         margin-top: 30px;
+        padding: 20px;
 
-        & > div:nth-of-type(2) {
-            margin: 60px 0;
+        @include mixins.md {
+            padding: 40px;
         }
+
         .date-label {
             font-weight: 600;
-            font-size: 22px;
+            font-size: 18px;
             margin-bottom: 20px;
-        }
-        .hourly-weather {
-            text-align: center;
-            flex: 1;
-            min-width: 40px;
 
-            .icon {
-                margin: 30px 0 15px 0;
-                height: 30px;
-                overflow: hidden;
-                img {
-                    margin: auto;
-                    max-height: 30px;
-                }
+
+            @include mixins.md {
+                font-size: 22px;
             }
-            & > div:nth-of-type(3) {
-                font-weight: 600;
+        }
+
+        & > div:nth-of-type(2) {
+            margin: 20px 0 30px;
+
+            @include mixins.md {
+                margin: 50px 0;
+            }
+            @include mixins.lg {
+                margin: 60px 0;
             }
         }
         
-    }
-}
 
-.hourly-weather-wrapper {
-    display: flex;
-    overflow-x: auto;
-    grid-gap: 10px;
+        .hourly-weather-wrapper {
+            display: flex;
+            overflow-x: auto;
+            grid-gap: 25px;
+            padding-bottom: 20px;
+
+            &::-webkit-scrollbar {
+                height: 5px;
+
+                @include mixins.md {
+                    height: 10px;
+                }
+
+                &-track, 
+                &-thumb { 
+                    border-radius: 10px;
+                }
+            }
+
+            .hourly-weather {
+                text-align: center;
+                flex: 1;
+                min-width: 23px;
+
+                @include mixins.md {
+                    min-width: 35px;
+                }
+
+                &:nth-of-type(1) {
+                    .time {
+                        &:before {
+                           content: '0';
+                        }
+                    }
+                }
+
+                .time {
+                    font-size: 12px;
+
+                    @include mixins.md {
+                        font-size: 18px;
+                    }
+                }
+
+                .icon {
+                    margin: 25px 0 12px 0;
+                    overflow: hidden;
+                    height: 23px;
+
+                    @include mixins.md {
+                        margin: 32px 0 15px 0;
+                        height: 26px;
+                    }
+                   
+                    img {
+                        margin: auto;
+                        max-height: 23px;
+
+                        @include mixins.md {
+                            max-height: 26px;
+                        }
+                    }
+                }
+
+                & > div:nth-of-type(3) {
+                    font-weight: 600;
+                    font-size: 14px;
+
+                    @include mixins.md {
+                        font-size: 20px;
+                    }
+                }
+
+                
+               
+            }
+            
+        }
+        
+    }
 }

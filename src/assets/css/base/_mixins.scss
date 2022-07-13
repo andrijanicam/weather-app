@@ -23,8 +23,8 @@
   }
 }
 
-@mixin xl-1600 {
-  @media screen and (min-width: 1600px) {
+@mixin xl-1800 {
+  @media screen and (min-width: 1800px) {
     @content;
   }
 }
@@ -39,15 +39,3 @@
   width: $width;
   height: $height;
 }
-
-// @mixin prefix($declarations, $prefixes: ()) {
-//   @each $prop, $value in $declarations {
-//       #{$prop}: #{$value};
-//       -webkit-#{$prop}: #{$value};
-//       -moz-#{$prop}: #{$value};
-//       -ms-#{$prop}: #{$value};
-//       -o-#{$prop}: #{$value};
-//   }
-// }
-
-  

@@ -12,7 +12,7 @@
   
   <footer> 
     <div class="container"> 
-      <div> Frontend </div>
+      <div> Frontend Task | Mad Duck Code </div>
     </div>
   </footer>
 </template>

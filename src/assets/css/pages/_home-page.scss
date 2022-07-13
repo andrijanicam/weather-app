@@ -21,7 +21,7 @@
 
     @include mixins.md {
       &:nth-of-type(n) {
-        font-size: 24px;
+        font-size: 24px; 
       }
     }
   }

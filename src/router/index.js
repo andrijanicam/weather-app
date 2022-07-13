@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import WeatherDetails from '../views/WeatherDetails.vue'
+import SingleCityPage from '../views/SingleCityPage.vue'
 
 const routes = [
   {
@@ -10,8 +10,8 @@ const routes = [
   },
   {
     path: '/:name',
-    name: 'WeatherDetails',
-    component: WeatherDetails,
+    name: 'SingleCityPage',
+    component: SingleCityPage,
     props: true
   } 
 ]
