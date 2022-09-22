@@ -12,7 +12,7 @@
   
   <footer> 
     <div class="container"> 
-      <div> Frontend Task | Mad Duck Code </div>
+      <div> 2022 </div>
     </div>
   </footer>
 </template>
